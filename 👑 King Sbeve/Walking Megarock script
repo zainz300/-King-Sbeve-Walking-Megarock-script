@@ -1,179 +1,184 @@
-local _0x1a = game:GetService("\80\108\97\121\101\114\115")
-local _0x2b = game:GetService("\82\101\112\108\105\99\97\116\101\100\83\116\111\114\97\103\101")
-local _0x3c = game:GetService("\87\111\114\107\115\112\97\99\101")
+local _0x1a2b = game:GetService("Players")
+local _0x3c4d = game:GetService("ReplicatedStorage")
+local _0x5e6f = game:GetService("Workspace")
 
-local _0x4d = _0x1a.LocalPlayer
-local _0x5e = _0x4d:WaitForChild("\108\101\97\100\101\114\115\116\97\116\115")
+local _0x7g8h = _0x1a2b.LocalPlayer
+local _0x9i0j = _0x7g8h:WaitForChild("leaderstats")
 
 --------------------------------------------------------------------------------
 -- PART 1: Tool Customization & Lobby Model Functions
 --------------------------------------------------------------------------------
 
-local function _0x6f()
-    local _0x70 = _0x5e:FindFirstChild("\71\108\111\118\101")
-    return _0x70 and _0x70.Value == "\71\117\97\114\100\105\97\110\32\65\110\103\101\108"
+local function _0x1k2l()
+    local _0x3m4n = _0x9i0j:FindFirstChild("Glove")
+    return _0x3m4n and _0x3m4n.Value == "Guardian Angel"
 end
 
-local function _0x81(_0x82)
-    if not _0x6f() then return end
-    _0x82.Name = "\71\117\97\114\100\105\97\110\32\65\110\103\101\108"
+local function _0x5o6p(_0x7q8r)
+    if not _0x1k2l() then return end
+    _0x7q8r.Name = "Guardian Angel"
 end
 
-local function _0x93(_0x94)
-    _0x94.ChildAdded:Connect(function(_0x95)
-        if _0x95:IsA("\84\111\111\108") then
-            _0x81(_0x95)
+local function _0x9s0t(_0x1u2v)
+    _0x1u2v.ChildAdded:Connect(function(_0x3w4x)
+        if _0x3w4x:IsA("Tool") then
+            _0x5o6p(_0x3w4x)
         end
     end)
 end
 
-if _0x4d.Character then
-    _0x93(_0x4d.Character)
+if _0x7g8h.Character then
+    _0x9s0t(_0x7g8h.Character)
 end
-_0x4d.CharacterAdded:Connect(_0x93)
+_0x7g8h.CharacterAdded:Connect(_0x9s0t)
 
-local _0xa6 = _0x4d:WaitForChild("\66\97\99\107\112\97\99\107")
-_0xa6.ChildAdded:Connect(function(_0xa7)
-    if _0xa7:IsA("\84\111\111\108") then
-        _0x81(_0xa7)
+local _0x5y6z = _0x7g8h:WaitForChild("Backpack")
+_0x5y6z.ChildAdded:Connect(function(_0x7a8b)
+    if _0x7a8b:IsA("Tool") then
+        _0x5o6p(_0x7a8b)
     end
 end)
 
-local function _0xb8()
-    if _0x3c:FindFirstChild("\110\97\109\101\77\111\100\101\108") then
-        _0x3c:FindFirstChild("\110\97\109\101\77\111\100\101\108"):Destroy()
+local function _0x9c0d()
+    if _0x5e6f:FindFirstChild("nameModel") then
+        _0x5e6f:FindFirstChild("nameModel"):Destroy()
     end
     
-    local _0xb9 = Instance.new("\77\111\100\101\108", _0x3c)
-    _0xb9.Name = "\110\97\109\101\77\111\100\101\108"
+    local _0x1e2f = Instance.new("Model", _0x5e6f)
+    _0x1e2f.Name = "nameModel"
 
-    local _0xba = _0x3c.Lobby["\71\117\97\114\100\105\97\110\32\65\110\103\101\108"]:Clone()
-    local _0xbb = _0x3c.Lobby.GloveStands["\71\117\97\114\100\105\97\110\32\65\110\103\101\108"]:Clone()
+    local _0x3g4h = _0x5e6f.Lobby["Guardian Angel"]:Clone()
+    local _0x5i6j = _0x5e6f.Lobby.GloveStands["Guardian Angel"]:Clone()
 
-    _0xba.Parent = _0xb9 
-    _0xbb.Parent = _0xb9
+    _0x3g4h.Parent = _0x1e2f 
+    _0x5i6j.Parent = _0x1e2f
 
-    -- Kept the ClickDetector active on the custom model glove
-    if not _0xba:FindFirstChildOfClass("\67\108\105\99\107\68\101\116\101\99\116\111\114") then
-        Instance.new("\67\108\105\99\107\68\101\116\101\99\116\111\114", _0xba)
+    if _0x3g4h:FindFirstChildOfClass("ClickDetector") then
+        _0x3g4h:FindFirstChildOfClass("ClickDetector"):Destroy()
     end
 
-    _0xb9:PivotTo(CFrame.new(17906.281, -128.5, -3542.889) * CFrame.Angles(math.rad(180), math.rad(90), 0))
-    return _0xb9, _0xba, _0xbb
+    _0x1e2f:PivotTo(CFrame.new(17906.281, -128.5, -3542.889) * CFrame.Angles(math.rad(180), math.rad(90), 0))
+    return _0x1e2f, _0x3g4h, _0x5i6j
 end
 
-local function _0xc9(_0xca, _0xcb, _0xcc)
-    _0xcb.Name = "\71\117\97\114\100\105\97\110\32\65\110\103\101\108"
-    _0xcc.Name = "\83\116\97\110\100"
+local function _0x7k8l(_0x9m0n, _0x1o2p, _0x3q4r)
+    _0x1o2p.Name = "Guardian Angel"
+    _0x3q4r.Name = "Stand"
 end
 
 --------------------------------------------------------------------------------
 -- PART 2: Stand Click Detection & Full Sequence Trigger
 --------------------------------------------------------------------------------
 
-local function _0xdd(_0xde)
-    local _0xdf = _0x2b.GloveEquipParticle.Attachment
-    local _0xe0 = _0x2b.GloveEquipParticle.Attachment2
-    local _0xe1 = _0xde:FindFirstChildOfClass("\67\108\105\99\107\68\101\116\101\99\116\111\114") or Instance.new("\67\108\105\99\107\68\101\116\101\99\116\111\114", _0xde)
+local function _0x5s6t(_0x7u8v)
+    local _0x9w0x = _0x3c4d.GloveEquipParticle.Attachment
+    local _0x1y2z = _0x3c4d.GloveEquipParticle.Attachment2
+    local _0x3a4b = Instance.new("ClickDetector", _0x7u8v)
     
-    local _0xe2 = _0x5e:WaitForChild("\71\108\111\118\101")
-    local _0xe3 = _0x4d:WaitForChild("\95\117\110\108\111\99\107\101\100\71\108\111\118\101\115"):WaitForChild("\71\117\97\114\100\105\97\110\32\65\110\103\101\108").Value 
+    local _0x5c6d = _0x9i0j:WaitForChild("Glove")
+    local _0x7e8f = _0x7g8h:WaitForChild("_unlockedGloves"):WaitForChild("Guardian Angel").Value 
 
-    _0xe1.MouseClick:Connect(function()
-        if _0xe3 then           
-           local _0xe4 = { [1] = "\73\110\118\101\110\116\111\114\121" }
+    _0x3a4b.MouseClick:Connect(function()
+        if _0x7e8f then           
+           local _0x9g0h = { [1] = "Inventory" }
            pcall(function()
-               _0x2b.Remotes.SidebarButtonClicked:FireServer(unpack(_0xe4))
+               _0x3c4d.Remotes.SidebarButtonClicked:FireServer(unpack(_0x9g0h))
            end)
 
            -- 1. Equip Guardian Angel via Network
-           local _0xe5 = { [1] = "\71\117\97\114\100\105\97\110\32\65\110\103\101\108" }
-           local _0xe6 = _0x2b:FindFirstChild("\95\78\69\84\87\79\82\75")
-           if _0xe6 then
-               local _0xe7 = _0xe6:FindFirstChild("\123\99\51\50\99\101\100\98\56\45\57\56\98\102\45\52\98\100\52\45\98\101\48\56\45\49\98\52\51\97\52\99\56\52\97\50\57\125")
-               if _0xe7 then
+           local _0x1i2j = { [1] = "Guardian Angel" }
+           local _0x3k4l = _0x3c4d:FindFirstChild("_NETWORK")
+           if _0x3k4l then
+               local _0x5m6n = _0x3k4l:FindFirstChild("{c32cedb8-98bf-4bd4-be08-1b43a4c84a29}")
+               if _0x5m6n then
                    pcall(function()
-                       _0xe7:FireServer(unpack(_0xe5))
+                       _0x5m6n:FireServer(unpack(_0x1i2j))
                    end)
                end
            end
 
            pcall(function()
-               fireclickdetector(_0x3c.Lobby["\71\117\97\114\100\105\97\110\32\65\110\103\101\108"].ClickDetector)
+               fireclickdetector(_0x5e6f.Lobby["Guardian Angel"].ClickDetector)
            end)
            
-           if _0xe2 then _0xe2.Value = "\71\117\97\114\100\105\97\110\32\65\110\103\101\108" end
+           if _0x5c6d then _0x5c6d.Value = "Guardian Angel" end
 
            -- 2. Execute the full sequence upon clicking the stand
            task.spawn(function()
                task.wait(0.5)
                
                -- Fire GeneralAbility with LocalPlayer
-               local _0xe8 = {
-                   [1] = _0x1a.LocalPlayer
+               local _0x7o8p = {
+                   [1] = game:GetService("Players").LocalPlayer
                }
 
-               pcall(function()
-                   _0x2b.GeneralAbility:FireServer(unpack(_0xe8))
-               end)
+               _0x3c4d.GeneralAbility:FireServer(unpack(_0x7o8p))
 
                task.wait(0.5)
 
-               -- Actually equip MR glove via Network and click its stand in the lobby
-               local _0xe9 = { [1] = "\77\82" }
-               local _0xea = _0xe6 and _0xe6:FindFirstChild("\123\97\49\52\56\54\53\102\99\45\98\50\48\54\45\52\51\53\53\45\57\102\51\53\45\52\49\98\50\57\100\51\52\102\53\97\102\125")
-               if _0xea then
+               -- Equip MEGAROCK via Network and click its lobby stand
+               local _0x9q0r = { [1] = "MEGAROCK" }
+               local _0x1s2t = _0x3k4l and _0x3k4l:FindFirstChild("{b31858c1-d169-4aa1-88fc-66b0eefb30c8}")
+               if _0x1s2t then
                    pcall(function()
-                       _0xea:FireServer(unpack(_0xe9))
+                       _0x1s2t:FireServer(unpack(_0x9q0r))
                    end)
                end
 
                pcall(function()
-                   fireclickdetector(_0x3c.Lobby["\77\82"].ClickDetector)
+                   fireclickdetector(_0x5e6f.Lobby["MEGAROCK"].ClickDetector)
                end)
 
-               if _0xe2 then _0xe2.Value = "\77\82" end
+               if _0x5c6d then _0x5c6d.Value = "MEGAROCK" end
 
                task.wait(0.5)
 
-               -- Teleport character after MR glove is equipped
+               -- Teleport character after MEGAROCK glove is equipped
                pcall(function()
-                   local _0xeb = _0x4d.Character
-                   if _0xeb then
-                       local _0xec = _0xeb:FindFirstChild("\72\117\109\97\110\111\105\100\82\111\111\116\80\97\114\116")
-                       if _0xec then
-                           _0xec.CFrame = CFrame.new(-1309.23267, 328.217407, 3.51514196, 0.00304586906, 1.39179264e-07, 0.999995351, -2.26006297e-10, 1, -1.39179221e-07, -0.999995351, 1.97916433e-10, 0.00304586906)
+                   local _0x3u4v = _0x7g8h.Character
+                   if _0x3u4v then
+                       local _0x5w6x = _0x3u4v:FindFirstChild("HumanoidRootPart")
+                       if _0x5w6x then
+                           _0x5w6x.CFrame = CFrame.new(-1309.23267, 328.217407, 3.51514196, 0.00304586906, 1.39179264e-07, 0.999995351, -2.26006297e-10, 1, -1.39179221e-07, -0.999995351, 1.97916433e-10, 0.00304586906)
                        end
                    end
                end)
 
-               task.wait(3)
-               task.wait(4)
+               task.wait(2)
 
-               -- Reset player
+               -- Reset player and fire Rockmode
                pcall(function()
-                   _0x4d.Reset:FireServer()
+                   _0x7g8h.Reset:FireServer()
+                   _0x3c4d.Rockmode:FireServer()
                end)
            end)
 
-           local _0xed = _0xdf:Clone()
-           _0xed.Parent = _0xde
-           for _, _0xee in pairs(_0xed:GetDescendants()) do if _0xee:IsA("\80\97\114\116\105\99\108\101\69\109\105\116\116\101\114") then _0xee:Emit(5) end end 
-           task.delay(1, function() if _0xed then _0xed:Destroy() end end)
+           local _0x7y8z = _0x9w0x:Clone()
+           _0x7y8z.Parent = _0x7u8v
+           for _, _0x9a0b in pairs(_0x7y8z:GetDescendants()) do 
+               if _0x9a0b:IsA("ParticleEmitter") then 
+                   _0x9a0b:Emit(5) 
+               end 
+           end 
+           task.delay(1, function() if _0x7y8z then _0x7y8z:Destroy() end end)
         else
-           _0x3c.Sounds.Fail:Play()
-           local _0xef = _0xe0:Clone()
-           _0xef.Parent = _0xde
-           for _, _0xf0 in pairs(_0xef:GetDescendants()) do if _0xf0:IsA("\80\97\114\116\105\99\108\101\69\109\105\116\116\101\114") then _0xf0:Emit(5) end end 
-           task.delay(1, function() if _0xef then _0xef:Destroy() end end)
+           _0x5e6f.Sounds.Fail:Play()
+           local _0x1c2d = _0x1y2z:Clone()
+           _0x1c2d.Parent = _0x7u8v
+           for _, _0x3e4f in pairs(_0x1c2d:GetDescendants()) do 
+               if _0x3e4f:IsA("ParticleEmitter") then 
+                   _0x3e4f:Emit(5) 
+               end 
+           end 
+           task.delay(1, function() if _0x1c2d then _0x1c2d:Destroy() end end)
         end
     end)
 end
 
 task.spawn(function()
     pcall(function()
-        local _0xf1, _0xf2, _0xf3 = _0xb8()
-        _0xc9(_0xf1, _0xf2, _0xf3)
-        _0xdd(_0xf2)
+        local _0x5g6h, _0x7i8j, _0x9k0l = _0x9c0d()
+        _0x7k8l(_0x5g6h, _0x7i8j, _0x9k0l)
+        _0x5s6t(_0x7i8j)
     end)
 end)
