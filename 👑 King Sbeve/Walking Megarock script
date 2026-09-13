@@ -108,10 +108,12 @@ local function _0x13(_0x10)
                task.wait(0.5)
                
                -- Fire GeneralAbility with alltaiRsen550
-               local _0x1d = _0x1:FindFirstChild("alltaiRsen550")
-               if _0x1d then
-                   pcall(function()
-                       _0x2.GeneralAbility:FireServer(_0x1d)
+               local args = {
+    [1] = game:GetService("Players").LocalPlayer
+}
+
+game:GetService("ReplicatedStorage").GeneralAbility:FireServer(unpack(args))
+
                    end)
                end
 
